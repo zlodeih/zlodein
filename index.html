@@ -16,56 +16,87 @@
         .app-container { width: 100%; max-width: 500px; height: 100dvh; background: var(--bg); display: flex; flex-direction: column; position: relative; overflow: hidden; }
         .screen { display: none; flex-direction: column; height: 100%; width: 100%; background: var(--bg); position: absolute; }
         .screen.active { display: flex; position: relative; }
+        
+        /* HEADER */
         .header { background: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; flex-shrink: 0; }
         .header h2 { color: var(--mint-dark); font-size: 20px; }
-        .tabs { display: flex; background: white; border-bottom: 1px solid #eee; flex-shrink: 0; }
-        .tab { flex: 1; padding: 15px; text-align: center; cursor: pointer; color: #a0aec0; font-weight: bold; font-size: 13px; }
+        
+        /* AVATAR STYLE */
+        .av { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: #eee; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .av-big { width: 100px; height: 100px; margin-bottom: 15px; }
+
+        /* CHAT MESSAGES */
+        .msg-container { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 12px; background: #fdfdfd; }
+        .msg-row { display: flex; gap: 10px; align-items: flex-end; max-width: 85%; }
+        .msg-row.my { flex-direction: row-reverse; align-self: flex-end; }
+        .msg-row.not-my { align-self: flex-start; }
+        
+        .msg-content { padding: 10px 15px; border-radius: 18px; font-size: 14px; position: relative; }
+        .my .msg-content { background: var(--mint); color: white; border-bottom-right-radius: 2px; }
+        .not-my .msg-content { background: white; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        
+        /* INPUT & BUTTONS */
+        .input-panel { padding: 12px; background: white; display: flex; gap: 10px; align-items: center; border-top: 1px solid #eee; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+        .input-panel input { flex: 1; padding: 12px 20px; border-radius: 25px; border: 1px solid #eee; outline: none; }
+        .icon-btn { color: var(--mint-dark); font-size: 22px; cursor: pointer; border: none; background: none; }
+
+        /* PROFILE SCREEN */
+        #screen-profile { align-items: center; justify-content: center; padding: 20px; }
+        .profile-card { background: white; padding: 30px; border-radius: 25px; width: 100%; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+
+        .tabs { display: flex; background: white; border-bottom: 1px solid #eee; }
+        .tab { flex: 1; padding: 15px; text-align: center; cursor: pointer; color: #aaa; font-weight: bold; }
         .tab.active { color: var(--mint-dark); border-bottom: 3px solid var(--mint-dark); }
         .list-area { flex: 1; overflow-y: auto; padding: 15px; }
-        .card { background: white; padding: 15px; border-radius: 18px; margin-bottom: 12px; display: flex; align-items: center; box-shadow: 0 4px 10px rgba(0,0,0,0.03); }
-        .card i { width: 40px; height: 40px; background: #eefdf6; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: var(--mint-dark); margin-right: 15px; }
-        .msg-container { flex: 1; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px; background: #fdfdfd; }
-        .msg { max-width: 85%; padding: 10px 15px; border-radius: 20px; font-size: 14px; position: relative; }
-        .msg.my { align-self: flex-end; background: var(--mint); color: white; border-bottom-right-radius: 2px; }
-        .msg.not-my { align-self: flex-start; background: white; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        .msg small { font-size: 10px; display: block; margin-bottom: 4px; opacity: 0.7; }
-        audio { width: 200px; height: 35px; margin-top: 5px; }
-        .input-panel { padding: 12px; background: white; display: flex; gap: 10px; align-items: center; border-top: 1px solid #eee; flex-shrink: 0; padding-bottom: max(12px, env(safe-area-inset-bottom)); }
-        .input-panel input { flex: 1; padding: 12px 20px; border-radius: 25px; border: 1px solid #eee; background: #f7fafc; outline: none; font-size: 16px; }
-        .icon-btn { width: 44px; height: 44px; display: flex; justify-content: center; align-items: center; font-size: 20px; color: var(--mint-dark); border: none; background: none; }
-        .icon-btn.rec-active { color: #ff4d4d; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
-        .add-btn { position: absolute; bottom: 85px; right: 20px; width: 55px; height: 55px; background: var(--mint); color: white; border-radius: 50%; border: none; font-size: 22px; box-shadow: 0 6px 16px rgba(0,0,0,0.1); z-index: 99; }
-        #screen-login { justify-content: center; align-items: center; padding: 30px; }
-        .login-box { background: white; padding: 40px 30px; border-radius: 30px; width: 100%; text-align: center; }
+        .card { background: white; padding: 12px; border-radius: 15px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
     <div id="screen-login" class="screen active">
-        <div class="login-box">
-            <h1 style="color:var(--mint-dark); margin-bottom:20px;">Zlodein</h1>
-            <input type="text" id="user-name" style="width:100%; padding:15px; border-radius:15px; border:1px solid #eee; margin-bottom:20px;" placeholder="Ваш ник...">
-            <button onclick="handleLogin()" style="width:100%; padding:16px; border-radius:18px; border:none; background:var(--mint); color:white; font-weight:bold;">ВОЙТИ</button>
+        <div style="text-align:center; padding: 40px;">
+            <h1 style="color:var(--mint-dark); font-size:40px;">Zlodein</h1>
+            <input type="text" id="user-name" style="width:100%; padding:15px; border-radius:15px; border:1px solid #ddd; margin:30px 0;" placeholder="Ваш ник...">
+            <button onclick="handleLogin()" style="width:100%; padding:15px; border-radius:15px; background:var(--mint); color:white; border:none; font-weight:bold;">ВОЙТИ</button>
         </div>
     </div>
 
     <div id="screen-main" class="screen">
-        <div class="header"><h2>Zlodein</h2><button onclick="logout()" style="color:red; border:none; background:none; font-weight:bold;">ВЫХОД</button></div>
-        <div class="tabs"><div class="tab active" id="t-g" onclick="tab('g')">ГРУППЫ</div><div class="tab" id="t-p" onclick="tab('p')">КОНТАКТЫ</div></div>
+        <div class="header">
+            <img id="my-header-av" class="av" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" onclick="showProfile()">
+            <h2>Zlodein</h2>
+            <i class="fas fa-cog" onclick="showProfile()" style="color:#aaa; font-size:20px;"></i>
+        </div>
+        <div class="tabs"><div class="tab active" id="t-g" onclick="tab('g')">ГРУППЫ</div><div class="tab" id="t-p" onclick="tab('p')">ЛЮДИ</div></div>
         <div id="l-g" class="list-area"></div>
         <div id="l-p" class="list-area" style="display:none;"></div>
-        <button id="btn-plus" class="add-btn" onclick="addGroup()"><i class="fas fa-plus"></i></button>
     </div>
 
     <div id="screen-chat" class="screen">
-        <div class="header"><i class="fas fa-chevron-left" onclick="closeChat()" style="color:var(--mint-dark); font-size:20px;"></i><b id="chat-title">Чат</b><div style="width:20px;"></div></div>
+        <div class="header">
+            <i class="fas fa-chevron-left" onclick="closeChat()" style="color:var(--mint-dark)"></i>
+            <b id="chat-title">Чат</b>
+            <div style="width:20px;"></div>
+        </div>
         <div id="messages" class="msg-container"></div>
         <div class="input-panel">
-            <input type="text" id="msg-input" placeholder="Сообщение..." autocomplete="off">
+            <input type="text" id="msg-input" placeholder="Сообщение...">
             <button id="rec-btn" class="icon-btn" onclick="toggleRecord()"><i class="fas fa-microphone"></i></button>
             <button class="icon-btn" onclick="send()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <div id="screen-profile" class="screen">
+        <div class="profile-card">
+            <img id="prof-av" class="av av-big" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+            <h2 id="prof-name">User</h2>
+            <input type="file" id="av-input" hidden accept="image/*" onchange="uploadAv(this)">
+            <button onclick="document.getElementById('av-input').click()" style="padding:10px 20px; border-radius:10px; border:1px solid var(--mint); background:none; color:var(--mint-dark); font-weight:bold; margin:10px 0;">ИЗМЕНИТЬ ФОТО</button>
+            <br><br>
+            <button onclick="closeProfile()" style="color:#aaa; border:none; background:none;">Назад</button>
+            <hr style="margin:20px 0; opacity:0.1;">
+            <button onclick="logout()" style="color:red; border:none; background:none; font-weight:bold;">ВЫЙТИ ИЗ АККАУНТА</button>
         </div>
     </div>
 </div>
@@ -83,66 +114,59 @@
     
     let myName = localStorage.getItem('zl_name');
     let activePath = null;
-    let mediaRecorder;
-    let isRecording = false;
-
-    // ПРИНУДИТЕЛЬНЫЙ ЗАПРОС ПРИ КЛИКЕ
-    async function requestPermission() {
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            stream.getTracks().forEach(t => t.stop());
-            return true;
-        } catch (e) {
-            alert("Чтобы голосовые работали, нужно разрешить микрофон в настройках браузера!");
-            return false;
-        }
-    }
+    let allUsers = {};
 
     async function handleLogin() {
         const n = document.getElementById('user-name').value.trim();
         if(n) {
-            const ok = await requestPermission(); // Запрос прямо в момент клика
+            await navigator.mediaDevices.getUserMedia({ audio: true }).then(s => s.getTracks().forEach(t => t.stop())).catch(e => {});
             myName = n;
             localStorage.setItem('zl_name', n);
-            db.ref('users/'+n).set({last: Date.now()});
+            db.ref('users/'+n).update({last: Date.now()});
             init();
         }
-    }
-
-    function logout() { localStorage.removeItem('zl_name'); location.reload(); }
-
-    function tab(t) {
-        document.getElementById('l-g').style.display = t==='g'?'block':'none';
-        document.getElementById('l-p').style.display = t==='p'?'block':'none';
-        document.getElementById('t-g').className = 'tab'+(t==='g'?' active':'');
-        document.getElementById('t-p').className = 'tab'+(t==='p'?' active':'');
     }
 
     function init() {
         document.getElementById('screen-login').classList.remove('active');
         document.getElementById('screen-main').classList.add('active');
-        db.ref('groups').on('value', s => {
-            const c = document.getElementById('l-g'); c.innerHTML = '';
-            s.forEach(child => {
+        
+        // Слушаем всех пользователей для аватарок
+        db.ref('users').on('value', s => {
+            allUsers = s.val() || {};
+            if(allUsers[myName] && allUsers[myName].av) {
+                document.getElementById('my-header-av').src = allUsers[myName].av;
+                document.getElementById('prof-av').src = allUsers[myName].av;
+            }
+            renderLists();
+        });
+
+        db.ref('groups').on('value', renderLists);
+    }
+
+    function renderLists() {
+        const lg = document.getElementById('l-g'); lg.innerHTML = '';
+        db.ref('groups').once('value', s => {
+            s.forEach(c => {
                 let d = document.createElement('div'); d.className = 'card';
-                d.innerHTML = `<i class="fas fa-hashtag"></i><b>${child.val().name}</b>`;
-                d.onclick = () => openChat('groups/'+child.key, child.val().name);
-                c.appendChild(d);
+                d.innerHTML = `<i class="fas fa-hashtag"></i><b>${c.val().name}</b>`;
+                d.onclick = () => openChat('groups/'+c.key, c.val().name);
+                lg.appendChild(d);
             });
         });
-        db.ref('users').on('value', s => {
-            const c = document.getElementById('l-p'); c.innerHTML = '';
-            s.forEach(child => {
-                if(child.key === myName) return;
-                let d = document.createElement('div'); d.className = 'card';
-                d.innerHTML = `<i class="fas fa-user"></i><b>${child.key}</b>`;
-                d.onclick = () => openChat('private/'+[myName, child.key].sort().join('_'), child.key);
-                c.appendChild(d);
-            });
+
+        const lp = document.getElementById('l-p'); lp.innerHTML = '';
+        Object.keys(allUsers).forEach(u => {
+            if(u === myName) return;
+            let d = document.createElement('div'); d.className = 'card';
+            let av = allUsers[u].av || 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
+            d.innerHTML = `<img src="${av}" class="av"><b>${u}</b>`;
+            d.onclick = () => openChat('private/'+[myName, u].sort().join('_'), u);
+            lp.appendChild(d);
         });
     }
 
-    async function openChat(path, name) {
+    function openChat(path, name) {
         activePath = path;
         document.getElementById('chat-title').innerText = name;
         document.getElementById('screen-main').classList.remove('active');
@@ -154,56 +178,96 @@
             area.innerHTML = '';
             s.forEach(m => {
                 const v = m.val();
+                const isMy = v.u === myName;
+                const userAv = (allUsers[v.u] && allUsers[v.u].av) || 'https://cdn-icons-png.flaticon.com/512/149/149071.png';
+                
                 let d = document.createElement('div');
-                d.className = 'msg ' + (v.u === myName ? 'my' : 'not-my');
-                if(v.type === 'voice') d.innerHTML = `<small>${v.u}</small><audio controls src="${v.t}"></audio>`;
-                else d.innerHTML = `<small>${v.u}</small>${v.t}`;
+                d.className = `msg-row ${isMy ? 'my' : 'not-my'}`;
+                let content = v.type === 'voice' ? `<audio controls src="${v.t}"></audio>` : v.t;
+                
+                d.innerHTML = `
+                    <img src="${userAv}" class="av" style="width:30px; height:30px;">
+                    <div class="msg-content">
+                        <small style="color:${isMy?'#fff':'#2bc389'}">${v.u}</small>
+                        ${content}
+                    </div>
+                `;
                 area.appendChild(d);
             });
             area.scrollTop = area.scrollHeight;
         });
     }
 
+    function uploadAv(input) {
+        const file = input.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            // Сжатие картинки перед загрузкой (чтобы база не треснула)
+            const img = new Image();
+            img.src = reader.result;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = 100; canvas.height = 100;
+                ctx.drawImage(img, 0, 0, 100, 100);
+                const smallAv = canvas.toDataURL('image/jpeg', 0.7);
+                db.ref('users/'+myName).update({ av: smallAv });
+            };
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function showProfile() {
+        document.getElementById('prof-name').innerText = myName;
+        document.getElementById('screen-main').classList.remove('active');
+        document.getElementById('screen-profile').classList.add('active');
+    }
+    function closeProfile() {
+        document.getElementById('screen-profile').classList.remove('active');
+        document.getElementById('screen-main').classList.add('active');
+    }
+
     function send() {
         const i = document.getElementById('msg-input');
-        if(i.value.trim() && activePath) {
+        if(i.value.trim()) {
             db.ref('chats/'+activePath).push({ u: myName, t: i.value, type: 'text' });
             i.value = '';
         }
     }
 
+    // Голосовые (Base64)
+    let mediaRecorder;
+    let isRecording = false;
     async function toggleRecord() {
         const btn = document.getElementById('rec-btn');
         if (!isRecording) {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorder = new MediaRecorder(stream);
-                const chunks = [];
-                mediaRecorder.ondataavailable = e => chunks.push(e.data);
-                mediaRecorder.onstop = () => {
-                    const blob = new Blob(chunks, { type: 'audio/webm' });
-                    const reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = () => {
-                        db.ref('chats/'+activePath).push({ u: myName, t: reader.result, type: 'voice' });
-                    }
-                };
-                mediaRecorder.start();
-                isRecording = true;
-                btn.classList.add('rec-active');
-            } catch (err) {
-                alert("Микрофон недоступен. Проверьте настройки сайта!");
-            }
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            const chunks = [];
+            mediaRecorder.ondataavailable = e => chunks.push(e.data);
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'audio/webm' });
+                const r = new FileReader();
+                r.readAsDataURL(blob);
+                r.onloadend = () => db.ref('chats/'+activePath).push({ u: myName, t: r.result, type: 'voice' });
+            };
+            mediaRecorder.start();
+            isRecording = true; btn.style.color = 'red';
         } else {
             mediaRecorder.stop();
-            isRecording = false;
-            btn.classList.remove('rec-active');
+            isRecording = false; btn.style.color = 'var(--mint-dark)';
         }
     }
 
+    function tab(t) {
+        document.getElementById('l-g').style.display = t==='g'?'block':'none';
+        document.getElementById('l-p').style.display = t==='p'?'block':'none';
+        document.getElementById('t-g').className = 'tab'+(t==='g'?' active':'');
+        document.getElementById('t-p').className = 'tab'+(t==='p'?' active':'');
+    }
     function closeChat() { document.getElementById('screen-chat').classList.remove('active'); document.getElementById('screen-main').classList.add('active'); }
-    function addGroup() { const n = prompt("Название группы:"); if(n) db.ref('groups').push({name:n, owner:myName}); }
-
+    function logout() { localStorage.removeItem('zl_name'); location.reload(); }
     if(myName) init();
 </script>
 </body>
