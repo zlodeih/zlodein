@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>АНО ГЦЭК «Просвещение» — Пастельный дизайн</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Новые CSS переменные - Пастельный синий */
+        :root {
+            --primary-blue: #7aa5d2; /* Мягкий синий */
+            --secondary-blue: #a3c4e3; /* Светло-синий */
+            --accent-blue: #5b8bc0; /* Чуть более насыщенный для наведения */
+            --gradient-accent: linear-gradient(135deg, #7aa5d2, #a3c4e3);
+            --text-dark: #2c3e50; /* Темный серо-синий для текста */
+            --text-medium: #5d6d7e;
+            --text-light: #95a5a6;
+            --bg-body: #f4f8fb; /* Очень светлый голубоватый фон */
+            --white: #ffffff;
+            --shadow-light: 0 4px 15px rgba(122, 165, 210, 0.15);
+            --shadow-medium: 0 10px 30px rgba(122, 165, 210, 0.25);
+            --border-radius-lg: 20px;
+            --border-radius-sm: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Плавная прокрутка по якорям */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Шапка */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); /* Эффект размытия под шапкой */
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: var(--primary-blue);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Главный экран */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.6)), 
+                        url('assets/img_1.png') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 15%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            max-width: 900px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        /* Кнопка с анимацией нажатия */
+        .btn {
+            display: inline-block;
+            background: var(--gradient-accent);
+            color: var(--white);
+            padding: 15px 45px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(122, 165, 210, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(122, 165, 210, 0.6);
+            background: linear-gradient(135deg, #8cb3db, #aed0eb);
+        }
+
+        .btn:active {
+            transform: translateY(1px) scale(0.96); /* Анимация прожимания */
+            box-shadow: 0 2px 10px rgba(122, 165, 210, 0.4);
+        }
+
+        /* Секции */
+        .section {
+            padding: 100px 10%;
+        }
+
+        .section-title-wrap {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 70px;
+            height: 4px;
+            background: var(--primary-blue);
+            display: block;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 20px auto 0;
+        }
+
+        /* О нас */
+        .about-section {
+            background-color: var(--white);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-medium);
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature-item {
+            background-color: var(--bg-body);
+            padding: 25px 20px;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: default;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-light);
+            background-color: #eaf1f8;
+        }
+
+        .feature-item i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover i {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-item h4 {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        /* Проекты */
+        .projects-section {
+            background-color: var(--bg-body);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-bottom: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-medium);
+            border-bottom-color: var(--primary-blue);
+        }
+
+        .card-img {
+            height: 240px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.05); /* Легкое увеличение фото при наведении */
+        }
+
+        .card-img-wrap {
+            overflow: hidden;
+        }
+
+        .card-content {
+            padding: 30px;
+            background: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-content h3 {
+            color: var(--primary-blue);
+        }
+
+        .card-content p {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Новости */
+        .news-section {
+            background-color: var(--white);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .news-card {
+            background: var(--bg-body);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 30px;
+        }
+
+        .news-meta {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .news-meta i {
+            color: var(--primary-blue);
+        }
+
+        .news-title {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .news-text {
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-link {
+            display: inline-block;
+            font-weight: 600;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-size: 0.95rem;
+            padding: 8px 0;
+            transition: transform 0.2s ease, color 0.3s ease;
+        }
+
+        .news-link:hover {
+            color: var(--accent-blue);
+            transform: translateX(5px); /* Стрелочка уезжает вправо */
+        }
+
+        /* Футер */
+        footer {
+            background: #24303d;
+            color: #bdc3c7;
+            padding: 80px 10% 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--white);
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background: var(--primary-blue);
+            display: block;
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .footer-col i {
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+
+        /* АНИМАЦИИ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ (Используются в JS) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Задержки для карточек, чтобы они появлялись по очереди */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+
+        @media (max-width: 992px) {
+            header { padding: 15px 5%; }
+            .hero h1 { font-size: 2.5rem; }
+            .section { padding: 70px 5%; }
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; padding: 15px; }
+            nav { margin-top: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;}
+            nav a { margin: 0; font-size: 0.9rem; }
+            .hero h1 { font-size: 2rem; padding: 0 5%; }
+            .about-grid { grid-template-columns: 1fr; gap: 30px;}
+            .reveal { transform: translateY(20px); } /* Меньше амплитуда на мобильных */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="#" class="logo">ГЦЭК «Просвещение»</a>
+    <nav>
+        <a href="#about">О нас</a>
+        <a href="#projects">Проекты</a>
+        <a href="#news">Новости</a>
+        <a href="#contacts">Контакты</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1 class="reveal">Раскрываем потенциал.<br>Строим будущее.</h1>
+    <p class="reveal delay-1">Мы оказываем помощь и поддержку в реализации социальных проектов для детей, молодежи и семей. Наша миссия — быть полезными нашему городу и обществу.</p>
+    <a href="#projects" class="btn reveal delay-2">Наши проекты</a>
+</section>
+
+<section id="about" class="section about-section">
+    <div class="about-grid">
+        <div class="about-text-wrap reveal">
+            <h2 class="section-title">Кто мы такие?</h2>
+            <p class="about-text" style="margin-top: 25px;">
+                Автономная некоммерческая организация "Гражданский центр эффективных коммуникаций «Просвещение»" решает социальные проблемы путем развития навыков коммуникации. Мы обучаем социальному проектированию, развиваем культуру, проводим фестивали и помогаем подросткам найти свою траекторию в жизни.
+            </p>
+        </div>
+        <div class="about-features">
+            <div class="feature-item reveal delay-1">
+                <i class="fas fa-brain"></i>
+                <h4>Обучение</h4>
+            </div>
+            <div class="feature-item reveal delay-2">
+                <i class="fas fa-project-diagram"></i>
+                <h4>Проекты</h4>
+            </div>
+            <div class="feature-item reveal delay-3">
+                <i class="fas fa-comments"></i>
+                <h4>Коммуникация</h4>
+            </div>
+            <div class="feature-item reveal delay-4">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h4>Поддержка</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="projects" class="section projects-section">
+    <div class="section-title-wrap reveal">
+        <h2 class="section-title">Наши проекты</h2>
+        <p class="section-subtitle">Реализуем инициативы, меняющие жизнь к лучшему.</p>
+    </div>
+    
+    <div class="grid-container">
+        <div class="card reveal delay-1">
+            <div class="card-img-wrap">
+                <img src="assets/img_10.png" alt="Твоя траектория" class="card-img">
+            </div>
+            <div class="card-content">
+                <h3>Твоя траектория</h3>
+                <p>Совместно с фондом «Открывая горизонты». Поддержка подростков в трудной жизненной ситуации и помощь в подготовке к осознанному трудоустройству. Изучаем профессии будущего!</p>
+            </div>
+        </div>
+
+        <div class="card reveal delay-2">
+            <div class="card-img-wrap">
+                <img src="assets/img.png" alt="Школа социального проектирования" class="card-img">
+            </div>
+            <div class="card-content">
+                <h3>Школа соц. проектирования</h3>
+                <p>Работа с учащимися 8-10 классов. Подростки сами создают социальные проекты разной направленности. Учимся менять мир вокруг себя своими руками.</p>
+            </div>
+        </div>
+
+        <div class="card reveal delay-3">
+            <div class="card-img-wrap">
+                <img src="assets/img_6.png" alt="Безопасность наших детей" class="card-img">
+            </div>
+            <div class="card-content">
+                <h3>Безопасность детей</h3>
+                <p>Создание серии аудио и видеоматериалов (в том числе мультфильмов) для детей и родителей по безопасности в городе, в лесу и на транспорте.</p>
+            </div>
+        </div>
+
+        <div class="card reveal delay-4">
+            <div class="card-img-wrap">
+                <img src="assets/img_7.png" alt="Fe-кластер" class="card-img">
+            </div>
+            <div class="card-content">
+                <h3>Fe-кластер</h3>
+                <p>Мобильная уличная арт-площадка при поддержке фонда «Искусство, наука и спорт», на которой регулярно организуются городские фестивали и творческие встречи.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="news" class="section news-section">
+    <div class="section-title-wrap reveal">
+        <h2 class="section-title">Новости и события</h2>
+        <p class="section-subtitle">Будьте в курсе наших последних занятий и проектов.</p>
+    </div>
+
+    <div class="news-grid">
+        <div class="news-card reveal delay-1">
+            <img src="assets/img.png" alt="Игра Строители севера" class="news-img">
+            <div class="news-content">
+                <div class="news-meta">
+                    <i class="far fa-calendar-alt"></i> 27 февраля 2026
+                </div>
+                <h3 class="news-title">Игра «Строители севера»</h3>
+                <p class="news-text">На занятии проекта «Твоя траектория» мы строили новый город! Ребята прорабатывали инфраструктуру, распределяли рабочие места и решали проблемы.</p>
+                <a href="https://vk.com/education46" target="_blank" class="news-link">Читать в ВК &rarr;</a>
+            </div>
+        </div>
+
+        <div class="news-card reveal delay-2">
+            <img src="assets/img_8.png" alt="Таинственный космос" class="news-img">
+            <div class="news-content">
+                <div class="news-meta">
+                    <i class="far fa-calendar-alt"></i> 15 февраля 2026
+                </div>
+                <h3 class="news-title">Таинственный космос</h3>
+                <p class="news-text">Отправились в космическое путешествие! Учились быть гибкими, быстро осваивать новые профессии и размышляли о своем месте в будущем.</p>
+                <a href="https://vk.com/education46" target="_blank" class="news-link">Читать в ВК &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="contacts">
+    <div class="footer-grid">
+        <div class="footer-col reveal delay-1">
+            <h4>ГЦЭК «Просвещение»</h4>
+            <p>Оказываем поддержку в разработке навыков эффективных коммуникаций.</p>
+            <div class="social-links">
+                <a href="https://vk.com/education46" target="_blank"><i class="fab fa-vk"></i></a>
+            </div>
+        </div>
+        
+        <div class="footer-col reveal delay-2">
+            <h4>Локация</h4>
+            <p><i class="fas fa-map-marker-alt"></i> Курская обл., г. Железногорск</p>
+            <p><i class="fas fa-building"></i> ул. Гайдара, д. 2 (Центр "Маяк-АРТ")</p>
+        </div>
+
+        <div class="footer-col reveal delay-3">
+            <h4>Связь</h4>
+            <p><i class="fas fa-phone-alt"></i> +7 (919) 274-12-67</p>
+            <p><i class="fas fa-envelope"></i> info@education46.ru</p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        &copy; 2026 АНО ГЦЭК «Просвещение». Все права защищены.
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const reveals = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Опционально: перестать наблюдать за элементом после его появления
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15, // Элемент появляется, когда 15% его высоты видно на экране
+            rootMargin: "0px 0px -50px 0px" // Небольшой отступ снизу
+        });
+
+        reveals.forEach(reveal => {
+            revealObserver.observe(reveal);
+        });
+    });
+</script>
+
+</body>
+</html>
